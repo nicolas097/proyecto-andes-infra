@@ -1,4 +1,4 @@
-Proyecto Andes: Automatización de Infraestructura en GCP
+# Proyecto Andes: Automatización de Infraestructura en GCP
 
 Este proyecto demuestra el despliegue profesional de una infraestructura dinámica usando **Terraform** en **Google Cloud Platform**. 
 
