@@ -1,0 +1,10 @@
+# Archivos de configuración local de Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+
+# SECRETOS (¡Lo más importante!)
+# No queremos que tus llaves de Google Cloud se filtren
+*.json
