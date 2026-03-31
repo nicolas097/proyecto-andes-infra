@@ -63,14 +63,14 @@ variable "tipo_servidor" {
 
 variable "zona_servidor" {
   description = "Zona del servidor"
-  type = string
-  default = "us-west1-a"
+  type        = string
+  default     = "us-central1-a" # <--- Cambia a Iowa
 }
 
 variable "region_servidor" {
   description = "Región de los recursos"
   type        = string
-  default     = "us-west1"
+  default     = "us-central1"   # <--- Cambia a Iowa
 }
 
 resource "google_compute_address" "ip_estatica" {
