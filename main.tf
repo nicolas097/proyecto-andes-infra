@@ -76,9 +76,9 @@ variable "region_servidor" {
 resource "google_compute_address" "ip_estatica" {
   name   = "ipv4-estatica"
   region = var.region_servidor
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 
 resource "google_compute_instance" "servidor_andes" {
