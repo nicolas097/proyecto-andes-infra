@@ -1,6 +1,6 @@
 # 1. Reservar un bloque de IPs privadas exclusivas para la base de datos
 resource "google_compute_global_address" "rango_ip_privado" {
-  name = "rango_ip_privado-andes"
+  name = "rango-ip-privado-andes"
   purpose = "VPC_PEERING"
   address_type = "INTERNAL"
   prefix_length = 16
