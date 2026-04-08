@@ -34,6 +34,11 @@ resource "google_sql_database_instance" "postgres_andes" {
 
       }
 
+    database_flags  {
+      name = "cloudsql.iam_authentication"
+      value = "on"
+    }
+
   }
 
   #Semaforo 
@@ -41,3 +46,25 @@ resource "google_sql_database_instance" "postgres_andes" {
 }
 
 
+
+
+
+resource "google_sql_user" "iam_user" {
+
+name = "1003493825793-compute"
+
+instance = google_sql_database_instance.postgres_andes.name
+
+type = "CLOUD_IAM_SERVICE_ACCOUNT"
+
+}
+
+resource "google_project_iam_member" "permiso_sql" {
+
+project = "andes-terraform-lab"
+
+role = "roles/cloudsql.instanceUser"
+
+member = "serviceAccount:1003493825793-compute@developer.gserviceaccount.com"
+
+}
