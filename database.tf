@@ -47,16 +47,18 @@ resource "google_sql_database_instance" "postgres_andes" {
 
 
 
-
-
+# 1. El robot (Cuenta de Servicio) - Este es el que usa el Proxy
 resource "google_sql_user" "iam_user" {
+  name     = "1003493825793-compute@developer"
+  instance = google_sql_database_instance.postgres_andes.name
+  type     = "CLOUD_IAM_SERVICE_ACCOUNT"
+}
 
-name = "1003493825793-compute@developer"
-
-instance = google_sql_database_instance.postgres_andes.name
-
-type = "CLOUD_IAM_SERVICE_ACCOUNT"
-
+# 2. Tú (Usuario Humano) - Este te dejará entrar por la web
+resource "google_sql_user" "iam_user_humano" {
+  name     = "nico.gcp.dev@gmail.com" 
+  instance = google_sql_database_instance.postgres_andes.name
+  type     = "CLOUD_IAM_USER"
 }
 
 resource "google_project_iam_member" "permiso_sql" {
