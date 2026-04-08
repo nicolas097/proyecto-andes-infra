@@ -29,7 +29,7 @@ resource "google_sql_database_instance" "postgres_andes" {
     tier = "db-f1-micro"
     # CONFIGURACIÓN DE SEGURIDAD: Apagar IP pública y conectarla al túnel
       ip_configuration {
-        ipv4_enabled = false
+        ipv4_enabled = true
         private_network = google_compute_network.red_andes.id
 
       }
