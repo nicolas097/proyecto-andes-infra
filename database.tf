@@ -51,7 +51,7 @@ resource "google_sql_database_instance" "postgres_andes" {
 
 resource "google_sql_user" "iam_user" {
 
-name = "1003493825793-compute"
+name = "1003493825793-compute@developer"
 
 instance = google_sql_database_instance.postgres_andes.name
 
