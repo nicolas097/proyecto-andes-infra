@@ -47,6 +47,6 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
         run: |
-          ./cloud-sql-proxy $CONNECTION_NAME --port 5432 --auto-iam-auth &
+          ./cloud-sql-proxy $CONNECTION_NAME --port 5432 --auto-iam-authn &
           sleep 15
           psql "host=127.0.0.1 user=$DB_USER dbname=$DB_NAME sslmode=disable" -f database/init.sql
