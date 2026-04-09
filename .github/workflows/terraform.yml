@@ -27,11 +27,11 @@ jobs:
         run: terraform init
 
       - name: "Terraform Plan"
-        run: terraform plan -input=false
+        run: terraform plan -input=false -var="project_id=${{ secrets.PROJECT_ID }}" -var="db_name=${{ secrets.DB_NAME }}"
 
       - name: "Terraform Apply"
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false -var="project_id=${{ secrets.PROJECT_ID }}" -var="db_name=${{ secrets.DB_NAME }}"
 
       - name: "Install Cloud SQL Proxy & Postgres Client"
         run: |
