@@ -63,7 +63,7 @@ resource "google_sql_user" "iam_user_humano" {
 
 resource "google_project_iam_member" "permiso_sql" {
 
-project = "andes-terraform-lab"
+project = var.project_id
 
 role = "roles/cloudsql.instanceUser"
 
@@ -72,6 +72,6 @@ member = "serviceAccount:1003493825793-compute@developer.gserviceaccount.com"
 }
 
 resource "google_sql_database" "lab_andes" {
-  name     = "laboratorio_lab"
+  name     = var.db_name
   instance = google_sql_database_instance.postgres_andes.name
 }

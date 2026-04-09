@@ -4,12 +4,12 @@ provider "google" {
 }
 
 
-terraform {
-  backend "gcs" {
-    bucket  = "tf-state-proyecto-andes-0869ac36" # Ejemplo: tf-state-proyecto-andes-a1b2c3d4
-    prefix  = "terraform/state"
-  }
-}
+# terraform {
+#   backend "gcs" {
+#     bucket  = "tf-state-proyecto-andes-0869ac36" # Ejemplo: tf-state-proyecto-andes-a1b2c3d4
+#     prefix  = "terraform/state"
+#   }
+# }
 
 resource "google_compute_network" "red_andes" {
   name                    = "vpc-andes"
@@ -64,21 +64,21 @@ variable "tipo_servidor" {
 variable "zona_servidor" {
   description = "Zona del servidor"
   type        = string
-  default     = "us-central1-a" # <--- Cambia a Iowa
+  default     = "us-central1-b"
 }
 
 variable "region_servidor" {
   description = "Región de los recursos"
   type        = string
-  default     = "us-central1"   # <--- Cambia a Iowa
+  default     = "us-central1" 
 }
 
 resource "google_compute_address" "ip_estatica" {
   name   = "ipv4-estatica"
   region = var.region_servidor
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 }
 
 resource "google_compute_instance" "servidor_andes" {
@@ -121,7 +121,7 @@ resource "google_compute_instance" "servidor_andes" {
 resource "google_storage_bucket" "estado_terraform_andes" {
   name          = "tf-state-proyecto-andes-${random_id.bucket_suffix.hex}" # Nombre único global
   location      = "US" # Puede ser regional o multi-regional
-  force_destroy = false # Protección extra: no deja borrar el bucket si tiene archivos
+  force_destroy = true # Protección extra: no deja borrar el bucket si tiene archivos
 
   versioning {
     enabled = true # ¡Súper importante! Guarda versiones viejas por si algo sale mal
