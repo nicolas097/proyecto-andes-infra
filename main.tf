@@ -4,12 +4,12 @@ provider "google" {
 }
 
 
-# terraform {
-#   backend "gcs" {
-#     bucket  = "tf-state-proyecto-andes-0869ac36" # Ejemplo: tf-state-proyecto-andes-a1b2c3d4
-#     prefix  = "terraform/state"
-#   }
-# }
+terraform {
+  backend "gcs" {
+    bucket  = "andes-infra-nicolas-2026-v1" # Ejemplo: tf-state-proyecto-andes-a1b2c3d4
+    prefix  = "terraform/state"
+  }
+}
 
 resource "google_compute_network" "red_andes" {
   name                    = "vpc-andes"
