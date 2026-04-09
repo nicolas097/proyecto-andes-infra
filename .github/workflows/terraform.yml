@@ -35,8 +35,6 @@ jobs:
 
       - name: "Install Cloud SQL Proxy & Postgres Client"
         run: |
-          #
-           Descargamos el proxy para Linux (64 bits)
           curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.11.0/cloud-sql-proxy.linux.amd64
           chmod +x cloud-sql-proxy
           # Instalamos la herramienta psql para enviar el script
@@ -49,11 +47,6 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
         run: |
-          # 1. Iniciamos el proxy con autenticación IAM automática en segundo plano
           ./cloud-sql-proxy $CONNECTION_NAME --port 5432 --auto-iam-auth &
-          
-          # 2. Esperamos un momento a que el túnel se levante
-          sleep 10
-          
-          # 3. Ejecutamos tu archivo DDL usando la identidad del Service Account
+          sleep 15
           psql "host=127.0.0.1 user=$DB_USER dbname=$DB_NAME sslmode=disable" -f database/init.sql
