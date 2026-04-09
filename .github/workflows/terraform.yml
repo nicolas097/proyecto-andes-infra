@@ -42,12 +42,11 @@ jobs:
 
       - name: "Initialize Database Schema (IAM Auth)"
         env:
-          # Estas variables sacan los datos de tus Secrets de GitHub
           CONNECTION_NAME: ${{ secrets.INSTANCE_CONNECTION_NAME }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
-          echo "$GOOGLE_CREDENTIALS" > sa-key.json
-          ./cloud-sql-proxy $CONNECTION_NAME --port 5432 --auto-iam-authn &
+          ./cloud-sql-proxy $CONNECTION_NAME --port 5432 --auto-iam-authn --json-credentials "$GOOGLE_CREDENTIALS" &
           sleep 15
           psql "host=127.0.0.1 user=$DB_USER dbname=$DB_NAME sslmode=disable" -f database/init.sql
