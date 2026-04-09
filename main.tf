@@ -118,15 +118,15 @@ resource "google_compute_instance" "servidor_andes" {
 }
 
 # Creamos el Bucket para guardar el estado de Terraform
-resource "google_storage_bucket" "estado_terraform_andes" {
-  name          = "tf-state-proyecto-andes-${random_id.bucket_suffix.hex}" # Nombre único global
-  location      = "US" # Puede ser regional o multi-regional
-  force_destroy = true # Protección extra: no deja borrar el bucket si tiene archivos
+# resource "google_storage_bucket" "estado_terraform_andes" {
+#   name          = "tf-state-proyecto-andes-${random_id.bucket_suffix.hex}" # Nombre único global
+#   location      = "US" # Puede ser regional o multi-regional
+#   force_destroy = true # Protección extra: no deja borrar el bucket si tiene archivos
 
-  versioning {
-    enabled = true # ¡Súper importante! Guarda versiones viejas por si algo sale mal
-  }
-}
+#   versioning {
+#     enabled = true # ¡Súper importante! Guarda versiones viejas por si algo sale mal
+#   }
+# }
 
 # Necesitamos un ID único porque los nombres de los buckets son globales en todo Google
 resource "random_id" "bucket_suffix" {
